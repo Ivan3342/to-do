@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Jersey+15&display=swap');
+
+:root {
+    --davys-gray: #565857;
+    --ivory: #FFFCE8;
+    --old-gold: #B8B42D;
+    --federal-blue: #07004D;
+    --forest-green: #1B2A21;
+}
+
+.host-grotesk {
+    font-family: "Host Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#main {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+header {
+    background-color: var(--old-gold);
+    padding: 20px;
+}
+
+h1 {
+    color: var(--forest-green);
+    font-size: 36pt;
+    user-select: none;
+}
+
+#inputForm {
+    text-align: center;
+    margin: 20px;
+    background-color: var(--davys-gray);
+}
