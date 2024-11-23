@@ -40,5 +40,29 @@ h1 {
 #inputForm {
     text-align: center;
     margin: 20px;
-    background-color: var(--davys-gray);
+}
+
+#inputPolje {
+    font-size: 12pt;
+    width: 350px;
+    padding: 7px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--davys-gray);
+}
+
+#inputSlanje {
+    padding: 7px 32px;
+    border-radius: 50px;
+    border: 2px solid black;
+    font-size: 12pt;
+    background-color: var(--forest-green);
+    color: var(--ivory);
+    transition: 150ms ease-in-out;
+    font-weight: 600;
+}
+
+#inputSlanje:hover {
+    border: 2px solid var(--davys-gray);
+    background-color: var(--old-gold);
+    color: var(--forest-green);
 }
