@@ -66,3 +66,12 @@ h1 {
     background-color: var(--old-gold);
     color: var(--forest-green);
 }
+
+#itemi {
+    width: 60%;
+    padding: 20px;
+    /*border: 2px solid var(--davys-gray);*/
+    border-radius: 50px;
+    display: block;
+    margin: 10px auto;
+}
