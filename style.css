@@ -18,6 +18,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: 150ms ease-in-out;
 }
 
 #main {
@@ -57,7 +58,6 @@ h1 {
     font-size: 12pt;
     background-color: var(--forest-green);
     color: var(--ivory);
-    transition: 150ms ease-in-out;
     font-weight: 600;
 }
 
@@ -67,11 +67,63 @@ h1 {
     color: var(--forest-green);
 }
 
+#inputSlanje:active {
+    transition: 50ms linear;
+    background-color: yellow;
+}
+
 #itemi {
     width: 60%;
-    padding: 20px;
-    /*border: 2px solid var(--davys-gray);*/
-    border-radius: 50px;
+    padding: 10px;
+    border-radius: 30px;
     display: block;
     margin: 10px auto;
+    list-style: none;
+}
+
+#itemi li {
+    & span {
+        display: flex;
+        align-items: center;
+    }
+    border: 1px solid var(--davys-gray);
+    margin: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox {
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--davys-gray);
+    border-radius: none;
+}
+
+.deleteDugme {
+    margin-right:5px;
+    width: 32px;
+    height: 32px;
+    font-size: 16pt;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--old-gold);
+    color: var(--forest-green);
+    font-weight: bold;
+}
+
+.deleteDugme:hover {
+    background-color: var(--forest-green);
+    color: var(--ivory);
+}
+
+.deleteDugme:active {
+    background-color: var(--davys-gray);
+    transition: 50ms linear;
+}
+
+.checked {
+    text-decoration: line-through;
 }

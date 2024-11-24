@@ -18,8 +18,7 @@ const dodaj = (tekst) => {
             checked: false
         }
         stavke.push(stavka);
-        renderList(stavke);
-        /*addToLocalStorage(stavke);*/
+        addToLocalStorage(stavke);
         inputPolje.value = "";
     }
 
@@ -43,7 +42,24 @@ const renderList = (lista) => {
             }
         }
 
-        li.innerHTML = `<input type="checkbox" class="checkbox" ${checked}>${elementNiza.sadrzaj}<button class="deleteDugme">🗑️</button>`;
-        listaZadataka.append(li);
+        li.innerHTML = `<span><input type="checkbox" class="checkbox" ${checked}>${elementNiza.sadrzaj}</span><button class="deleteDugme">🗑️</button>`;
+        listaZadataka.appendChild(li);
+        if(stavke.length > 0) {
+            listaZadataka.style.border = "2px solid var(--davys-gray)";
+        }
     })
+}
+
+const addToLocalStorage = listaZadataka => {
+    localStorage.setItem('todos', JSON.stringify(listaZadataka));
+    renderList(listaZadataka);
+}
+
+const getFromLocalStorage = () => {
+    const reference = localStorage.getItem('todos');
+
+    if(reference) {
+        stavke = JSON.parse(reference);
+        renderList(stavke);
+    }
 }
