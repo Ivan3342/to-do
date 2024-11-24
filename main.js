@@ -63,3 +63,33 @@ const getFromLocalStorage = () => {
         renderList(stavke);
     }
 }
+
+const toggle = id => {
+    stavke.map(elementNiza => {
+        if(elementNiza.id != id) {
+            elementNiza.checked = !elementNiza.checked;
+        }
+    })
+
+    addToLocalStorage(stavke);
+}
+
+const deleteItem = id => {
+    stavke = stavke.filter(function(elementNiza) {
+        return elementNiza.id != id;
+    });
+
+    addToLocalStorage(stavke);
+}
+
+getFromLocalStorage();
+
+listaZadataka.addEventListener("click", (event) => {
+    if(event.target.type == "checkbox") {
+        toggle(event.target.parentElement.getAttribute("id"));
+    }
+
+    if(event.target.classList.contains("delete-button")) {
+        deleteItem(event.target.parentElement.getAttribute("id"))
+    }
+})
