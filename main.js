@@ -13,7 +13,7 @@ inputForm.addEventListener("submit", (event) => {
 const dodaj = (tekst) => {
     if(tekst !== "") {
         const stavka = {
-            id: Date(),
+            id: Date.now(),
             sadrzaj: tekst,
             checked: false
         }
@@ -21,36 +21,40 @@ const dodaj = (tekst) => {
         addToLocalStorage(stavke);
         inputPolje.value = "";
     }
-
-    
 }
 
 const renderList = (lista) => {
     listaZadataka.innerHTML = "";
-    lista.map((elementNiza) => {
-        const cekiran = elementNiza.checked ? 'checked' : null;
+    lista.forEach((elementNiza) => {
+        const cekiran = elementNiza.checked ? 'checked' : '';
         const li = document.createElement("li");
         li.classList.add("item");
         li.id = elementNiza.id;
-
-        if(elementNiza.checked == true) {
-            li.classList.add("checked");
+        const span = document.createElement("span");
+        span.id = "sadrzajItema";
+        if (elementNiza.checked) {
+            span.classList.add("checked");
         }
-        else {
-            if(li.classList.contains("checked")) {
-                li.classList.remove("checked");
-            }
-        }
+        span.innerHTML = `
+            <input type="checkbox" class="checkbox" ${cekiran} data-id="${elementNiza.id}">
+            ${elementNiza.sadrzaj}
+        `;
+        li.appendChild(span);
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("deleteDugme");
+        deleteButton.innerHTML = "🗑️";
+        li.appendChild(deleteButton);
 
-        li.innerHTML = `<span><input type="checkbox" class="checkbox" ${cekiran}>${elementNiza.sadrzaj}</span><button class="deleteDugme">🗑️</button>`;
         listaZadataka.appendChild(li);
-        if(stavke.length > 0) {
-            listaZadataka.style.border = "2px solid var(--davys-gray)";
-        }
-    })
+    });
+    if (lista.length === 0) {
+        listaZadataka.style.border = "none";
+    } else {
+        listaZadataka.style.border = "2px solid var(--davys-gray)";
+    }
 }
 
-const addToLocalStorage = listaZadataka => {
+const addToLocalStorage = (listaZadataka) => {
     localStorage.setItem('todos', JSON.stringify(listaZadataka));
     renderList(listaZadataka);
 }
@@ -64,11 +68,12 @@ const getFromLocalStorage = () => {
     }
 }
 
-const toggle = id => {
-    stavke.map(elementNiza => {
-        if(elementNiza.id == id) {
-            elementNiza.checked = !elementNiza.checked;
+const toggle = (id) => {
+    stavke = stavke.map(element => {
+        if (element.id == id) {
+            element.checked = !element.checked;
         }
+        return element;
     });
 
     addToLocalStorage(stavke);
@@ -76,23 +81,26 @@ const toggle = id => {
 
 const deleteItem = id => {
     stavke = stavke.filter(function(elementNiza) {
-        console.log("Obrisan");
         return elementNiza.id != id;
     });
 
     addToLocalStorage(stavke);
+
+    if (stavke.length === 0) {
+        listaZadataka.style.border = "none";
+    }
 }
 
 getFromLocalStorage();
 
 listaZadataka.addEventListener("click", (event) => {
-    
-    if(event.target.type === "checkbox") {
-        toggle(event.target.parentElement.getAttribute("id"));
-        console.log(event.target.parentElement.getAttribute("id"))
+    if (event.target.type === "checkbox") {
+        const taskId = event.target.getAttribute("data-id");
+        toggle(taskId);
     }
 
-    if(event.target.classList.contains("delete-button")) {
-        deleteItem(event.target.parentElement.getAttribute("id"))
+    if (event.target.classList.contains("deleteDugme")) {
+        const taskId = event.target.parentElement.getAttribute("id");
+        deleteItem(taskId);
     }
-})
+});
