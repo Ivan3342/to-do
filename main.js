@@ -1,7 +1,6 @@
 const inputForm = document.getElementById("inputForm");
 const inputPolje = document.getElementById("inputPolje");
 const inputSlanje = document.getElementById("inputSlanje");
-
 const listaZadataka = document.getElementById("itemi");
 
 let stavke = [];
@@ -18,11 +17,13 @@ const dodaj = (tekst) => {
             sadrzaj: tekst,
             checked: false
         }
+        stavke.push(stavka);
+        renderList(stavke);
+        /*addToLocalStorage(stavke);*/
+        inputPolje.value = "";
     }
 
-    stavke.push(stavka);
-    /*addToLocalStorage(stavke);*/
-    inputPolje.value = "";
+    
 }
 
 const renderList = (lista) => {
