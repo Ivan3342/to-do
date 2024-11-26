@@ -95,12 +95,10 @@ getFromLocalStorage();
 
 listaZadataka.addEventListener("click", (event) => {
     if (event.target.type === "checkbox") {
-        const taskId = event.target.getAttribute("data-id");
-        toggle(taskId);
+        toggle(event.target.getAttribute("data-id"));
     }
 
     if (event.target.classList.contains("deleteDugme")) {
-        const taskId = event.target.parentElement.getAttribute("id");
-        deleteItem(taskId);
+        deleteItem(event.target.parentElement.getAttribute("id"));
     }
 });
